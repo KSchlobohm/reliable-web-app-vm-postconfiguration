@@ -36,3 +36,5 @@ pwsh -Command "Install-Module Az -Force"
 
 # make directory for SCP
 mkdir /home/azureadmin/web-app-pattern
+
+sudo chown -R azureadmin:azureadmin /home/azureadmin/web-app-pattern
