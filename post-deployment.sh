@@ -32,7 +32,7 @@ sudo apt-get install -y powershell
 sudo apt-get install -y azure-cli
 
 # install Az module
-pwsh -Command "Install-Module Az -Force"
+pwsh -Command "Install-Module -Name Az -Repository PSGallery -Force"
 
 # make directory for SCP
 mkdir /home/azureadmin/web-app-pattern
