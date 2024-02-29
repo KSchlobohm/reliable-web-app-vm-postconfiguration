@@ -17,7 +17,13 @@ sudo dpkg -i packages-microsoft-prod.deb
 rm packages-microsoft-prod.deb
 
 # Update packages
-sudo apt -y update
+sudo apt-get -y update
+
+# install pwsh core
+sudo apt-get install -y powershell
+
+# install Az module
+sudo pwsh -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser; Install-Module -Name Az -Repository PSGallery -Force"
 
 # install jq
 sudo apt-get install -y jq
@@ -25,14 +31,8 @@ sudo apt-get install -y jq
 # install dotnet
 sudo apt-get install -y dotnet-sdk-8.0
 
-# install pwsh core
-sudo apt-get install -y powershell
-
 # install Azure CLI
 sudo apt-get install -y azure-cli
-
-# install Az module
-pwsh -Command "Install-Module -Name Az -Repository PSGallery -Force  -SkipPublisherCheck"
 
 # make directory for SCP
 mkdir /home/azureadmin/web-app-pattern
