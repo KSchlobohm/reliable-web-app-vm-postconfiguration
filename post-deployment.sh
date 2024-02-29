@@ -19,12 +19,6 @@ rm packages-microsoft-prod.deb
 # Update packages
 sudo apt-get -y update
 
-# install pwsh core
-sudo apt-get install -y powershell
-
-# install Az module
-sudo pwsh -Command "Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser; Install-Module -Name Az -Repository PSGallery -Force"
-
 # install jq
 sudo apt-get install -y jq
 
@@ -32,9 +26,27 @@ sudo apt-get install -y jq
 sudo apt-get install -y dotnet-sdk-8.0
 
 # install Azure CLI
-sudo apt-get install -y azure-cli
+curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
 # make directory for SCP
 mkdir /home/azureadmin/web-app-pattern
 
 sudo chown -R azureadmin:azureadmin /home/azureadmin/web-app-pattern
+
+# install pwsh core
+
+# Download the PowerShell package file
+wget https://github.com/PowerShell/PowerShell/releases/download/v7.4.1/powershell_7.4.1-1.deb_amd64.deb
+
+###################################
+# Install the PowerShell package
+sudo dpkg -i powershell_7.4.1-1.deb_amd64.deb
+
+# Resolve missing dependencies and finish the install (if necessary)
+sudo apt-get install -f
+
+# Delete the downloaded package file
+rm powershell_7.4.1-1.deb_amd64.deb
+
+# install Az module
+sudo pwsh -Command "Install-Module -Name Az -Repository PSGallery -Scope AllUsers -Force"
